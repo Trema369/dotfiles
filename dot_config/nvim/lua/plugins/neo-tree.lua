@@ -18,7 +18,11 @@ return {
         enable_git_status = true,
         enable_diagnostics = true,
         default_component_configs = {
-          indent = { padding = 1 },
+          indent = {
+            padding = 1,
+            with_markers = false,
+            indent_size = 2,
+          },
           icon = { folder_closed = "", folder_open = "" },
           git_status = { symbols = { added = "+", modified = "~", removed = "-" } },
         },
@@ -32,6 +36,7 @@ return {
         },
         window = {
           width = 35,
+          position = "right",
           mappings = {
             ["a"] = "add", -- add a new file
             ["A"] = "add_directory",

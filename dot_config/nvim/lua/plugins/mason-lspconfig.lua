@@ -5,7 +5,9 @@ return {
     ensure_installed = {
       "pyright",
       "rust_analyzer",
-
+      "eslint",
+      "ts_ls",
+      "jsonls",
     },
   },
   dependencies = {

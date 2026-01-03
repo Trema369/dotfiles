@@ -1,12 +1,12 @@
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = { "*.axaml" },
   callback = function(event)
-    vim.lsp.start {
+    vim.lsp.start({
       name = "avalonia",
       cmd = { "avalonia-ls" },
       root_dir = vim.fn.getcwd(),
-    }
-  end
+    })
+  end,
 })
 vim.filetype.add({
   extension = {
