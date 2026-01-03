@@ -11,7 +11,7 @@ $directory$character
 """
 
 right_format = """
-$git_branch $aws$golang$dotnet
+$git_branch$git_status $aws$golang$dotnet
 """
 
 # ── CHARACTER ─────────────────────────────────
@@ -36,6 +36,17 @@ format = "[$symbol$branch(:$remote_branch)]($style)"
 
 [git_commit]
 tag_symbol = "  "
+
+[git_status]
+conflicted = "✖ "
+ahead = "↑${count} "
+behind = "↓${count} "
+staged = "● "
+deleted = "✘ "
+modified = "◆ "
+renamed = "➜ "
+untracked = "… "
+
 
 [hg_branch]
 symbol = " "
