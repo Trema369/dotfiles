@@ -11,7 +11,7 @@ $directory$character
 """
 
 right_format = """
-$git_branch$git_status $aws$golang$dotnet
+$git_branch$git_status $python$aws$golang$dotnet
 """
 
 # ── CHARACTER ─────────────────────────────────
@@ -190,6 +190,7 @@ symbol = " "
 
 [python]
 symbol = " "
+format = "[$symbol$virtualenv]($style)"
 
 [rlang]
 symbol = "󰟔 "
