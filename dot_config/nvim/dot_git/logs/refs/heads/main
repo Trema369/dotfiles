@@ -5,3 +5,6 @@ c5fb956b5efbf9689024e0ec212a052c486dcd1a 454930dbd4a3af53090217dae6ab59129bbb175
 730ef5923dcb85c71f32a1e955324c7625f1d266 c616c17f8e24feaa2b10c2993ad7717abcdf99dc Tadiwanashe Mazenge <trosky369@gmail.com> 1767460592 +0200	commit: added a git graph
 c616c17f8e24feaa2b10c2993ad7717abcdf99dc 02daa60f59f62b87926cc9a4f3f83d8fff091d5e Tadiwanashe Mazenge <trosky369@gmail.com> 1767460756 +0200	commit: all
 02daa60f59f62b87926cc9a4f3f83d8fff091d5e 40432f3bd7964deb46ae8e5dd95438e4a29d66f1 Tadiwanashe Mazenge <trosky369@gmail.com> 1767460908 +0200	commit: modified
+40432f3bd7964deb46ae8e5dd95438e4a29d66f1 7c72d4f48b60529860bacd0d8bc6b5c0d5eefb15 Tadiwanashe Mazenge <trosky369@gmail.com> 1770493108 +0200	commit: done
+7c72d4f48b60529860bacd0d8bc6b5c0d5eefb15 3bbc6ffee21a7db9d3f672fd295f074eb9f0faec Tadiwanashe Mazenge <trosky369@gmail.com> 1770495714 +0200	commit: configured ts
+3bbc6ffee21a7db9d3f672fd295f074eb9f0faec e6e009025c295be0efc976958b14adfb3069d1b6 Tadiwanashe Mazenge <trosky369@gmail.com> 1771104434 +0200	commit: configured ts.lsp

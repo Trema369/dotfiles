@@ -18,10 +18,18 @@ return {
     config = function()
       --cappabilities for autocompletion
       local capabilities = require("blink.cmp").get_lsp_capabilities()
+      local ts_config = require("lsp.ts")
+      ts_config.capabilities = capabilities
+      local original_on_attach = ts_config.on_attach
 
-      -- lua/configs/lspconfig.lua
+      ts_config.on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = true
+        if original_on_attach then
+          original_on_attach(client, bufnr)
+        end
+      end
+      vim.lsp.config("ts_ls", ts_config)
 
-      -- ROSLYN (+razor support)
       local mason_root = require("mason.settings").current.install_root_dir
       vim.lsp.config("roslyn", {
         capabilities = capabilities,
@@ -29,6 +37,7 @@ return {
           client.server_capabilities.documentFormattingProvider = false
         end,
       })
+
       vim.lsp.config("html", {
         capabilities = capabilities,
         on_attach = function(client)
@@ -37,18 +46,10 @@ return {
         end,
       })
 
-      vim.lsp.config("glslx", {
-        cmd = { "glslx", "--stdio" }, -- make sure glslx is in your PATH
-        filetypes = { "glsl", "vert", "frag", "comp", "geom", "tesc", "tese", "glslx" },
-        root_dir = function(fname)
-          return vim.fs.find(".git", { upward = true, path = fname })[1] or vim.fn.getcwd()
-        end,
-        capabilities = capabilities, -- optional, from nvim-cmp
-      })
-
       vim.lsp.config("lua_ls", {
         capabilities = capabilities,
       })
+
       vim.lsp.config("avalonia_ls", {
         default_config = {
           cmd = { "avalonia-ls" },        -- path to Avalonia LSP executable
@@ -70,7 +71,6 @@ return {
         end,
       })
 
-      --lua lsp configuration
       vim.lsp.config("lua_ls", {
         filetypes = { "lua" },
         settings = {
@@ -93,7 +93,6 @@ return {
           },
         },
       })
-      --diagnostics
 
       --Auto-formating on save
       vim.api.nvim_create_autocmd("LspAttach", {

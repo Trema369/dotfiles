@@ -55,6 +55,12 @@ local runners = {
   lua = function()
     return "lua " .. vim.fn.expand("%"), vim.fn.expand("%:p:h")
   end,
+  html = function()
+    local port = 8000
+    local dir = vim.fn.expand("%:p:h")
+    local cmd = string.format("cd %s && python3 -m http.server %d &", dir, port, port)
+    return cmd
+  end,
 
   cs = function()
     local root = find_project_root("*.csproj")

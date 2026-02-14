@@ -59,3 +59,4 @@ set -Ux PATH $HOME/.local/share/lua-language-server/bin $PATH
 set -Ux PATH /usr/local/bin /usr/bin $PATH
 set -Ux EDITOR nvim
 
+alias zen='flatpak run app.zen_browser.zen'
