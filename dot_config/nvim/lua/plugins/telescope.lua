@@ -16,6 +16,11 @@ return {
       end
 
       telescope.setup({
+        pickers = {
+          find_files = {
+            theme = "ivy",
+          },
+        },
 
         extensions = {
           fzf = {},
@@ -40,7 +45,7 @@ return {
                 ["h"] = fb_actions.goto_parent_dir,
                 ["l"] = require("telescope.actions").select_default,
               },
-            }
+            },
           },
         },
       })
@@ -67,7 +72,7 @@ return {
           grouped = true,
           previewer = false,
           initial_mode = "normal",
-          layout_config = { height = 40 }
+          layout_config = { height = 40 },
         })
       end)
     end,

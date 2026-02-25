@@ -1,35 +1,35 @@
 require("lualine").setup({
   options = {
+    enabled = false,
     icons_enabled = true,
     theme = "auto",
-    component_separators = "", -- IMPORTANT: remove inner separators
-    section_separators = { left = "", right = "" },
+    component_separators = "", -- no inner separators
+    section_separators = "",   -- no fancy edges
     globalstatus = true,
   },
 
   sections = {
-    -- LEFT ROUND EDGE
-    lualine_a = {
-      { "", separator = { left = "" }, right_padding = 2 },
-      "mode",
+    -- LEFT: branch + diagnostics
+    lualine_a = { "branch", "diagnostics" },
 
-    },
+    -- CENTER: filename
+    lualine_b = { { "filename", path = 1 } },
 
-    lualine_b = { "branch", "diff", "diagnostics" },
-    lualine_c = { { "filename", path = 1 } },
+    -- RIGHT: line/column
+    lualine_c = { "location" },
 
-    lualine_x = { "encoding", "fileformat", "filetype" },
-    lualine_y = { "progress" },
-
-    -- RIGHT ROUND EDGE
-    lualine_z = {
-      "location",
-      { "", separator = { right = "" } },
-    },
+    -- unused sections
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
   },
 
   inactive_sections = {
-    lualine_c = { "filename" },
-    lualine_x = { "location" },
+    lualine_a = { "branch", "diagnostics" },
+    lualine_b = { "filename" },
+    lualine_c = { "location" },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
   },
 })

@@ -29,7 +29,8 @@ return {
       local ok = pcall(vim.treesitter.start, buf, lang)
       if ok then
         -- Only set Tree-sitter indentexpr for languages that support it
-        local skip_indent = { "c_sharp", "cs" } -- add any other langs to skip
+        local skip_indent = { "c_sharp", "cs", "qml", "qmljs" } -- add any other langs to skip
+
         if not vim.tbl_contains(skip_indent, lang) then
           vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
@@ -37,7 +38,6 @@ return {
       return ok
     end
 
-    -- Install core parsers after lazy.nvim finishes loading all plugins
     vim.api.nvim_create_autocmd("User", {
       pattern = "LazyDone",
       once = true,

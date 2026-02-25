@@ -1,5 +1,8 @@
 require("config.lazy")
-require("config.lualine")
+require("config.tabline")
+require("config.theme")
+require("config.player")
+require("config.staline")
 require("config.whichkey")
 require("config.mappings")
 require("lsp.roslyn")
@@ -19,6 +22,8 @@ vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 vim.api.nvim_set_hl(0, "WinBar", { bg = "none" })
 vim.api.nvim_set_hl(0, "WinBarNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ff9e64" })
+
 -- Background of empty space in bufferline
 
 vim.opt.wrap = true
@@ -79,3 +84,9 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.cmd([[
   autocmd FileType xml,html,xaml,axaml setlocal shiftwidth=4 softtabstop=4 expandtab
 ]])
+vim.filetype.add({
+  extension = {
+    tsx = "typescriptreact",
+    jsx = "javascriptreact",
+  },
+})

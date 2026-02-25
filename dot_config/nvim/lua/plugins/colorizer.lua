@@ -18,7 +18,7 @@ return {
 
       --- style
       background = "dark", -- "dark" | "light
-      virtual_symbol = "⬤",
+      virtual_symbol = " 󱓻 ",
       --- performance
       debounce = 200,
     })

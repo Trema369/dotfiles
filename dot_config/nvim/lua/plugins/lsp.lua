@@ -29,6 +29,13 @@ return {
         end
       end
       vim.lsp.config("ts_ls", ts_config)
+      vim.lsp.config("qmlls", {
+        cmd = { "qmlls6" },
+        filetypes = { "qml" },
+        root_makers = { ".", ".git" },
+        capabilities = capabilities,
+      })
+      vim.lsp.enable("qmlls")
 
       local mason_root = require("mason.settings").current.install_root_dir
       vim.lsp.config("roslyn", {
@@ -37,7 +44,6 @@ return {
           client.server_capabilities.documentFormattingProvider = false
         end,
       })
-
       vim.lsp.config("html", {
         capabilities = capabilities,
         on_attach = function(client)

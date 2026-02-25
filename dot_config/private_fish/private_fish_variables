@@ -1,0 +1,5 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export --path QML2_IMPORT_PATH:/usr/lib/qt6/qml
+SETUVAR __fish_initialized:4300
+SETUVAR --export fish_user_paths:/home/trema/\x2elocal/share/nvim/mason/bin

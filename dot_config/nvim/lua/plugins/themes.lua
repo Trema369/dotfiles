@@ -18,7 +18,7 @@ return {
           mini = true,
         },
       })
-      vim.cmd.colorscheme("sonokai")
+      vim.cmd.colorscheme("tokyodark")
     end,
   },
   {
@@ -28,7 +28,7 @@ return {
     config = function()
       require("tokyonight").setup({
         style = "storm",
-        transparent = true,
+        transparent = false,
         terminal_colors = true,
         styles = {
           sidebars = "transparent",
@@ -41,10 +41,16 @@ return {
     "sainnhe/sonokai",
     priority = 1000,
     config = function()
-      vim.g.sonokai_transparent_background = "1"
+      vim.g.sonokai_transparent_background = "0"
       vim.g.sonokai_style = "andromeda"
       vim.g.sonokai_enable_italic = "1"
-      -- vim.cmd.colorscheme("sonokai")
+    end,
+  },
+  {
+    "tiagovla/tokyodark.nvim",
+    opts = {},
+    config = function(_, opts)
+      require("tokyodark").setup(opts) -- calling setup is optional
     end,
   },
 }
