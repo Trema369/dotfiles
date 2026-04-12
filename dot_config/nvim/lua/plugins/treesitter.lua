@@ -54,6 +54,7 @@ return {
           "tsx",
           "javascript",
           "razor",
+          "cpp",
         }, {
           max_jobs = 8,
         })

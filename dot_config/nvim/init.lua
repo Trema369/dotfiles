@@ -1,4 +1,5 @@
 require("config.lazy")
+require("config.diagnostics")
 require("config.tabline")
 require("config.theme")
 require("config.player")

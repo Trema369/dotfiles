@@ -29,10 +29,14 @@ return {
         end
       end
       vim.lsp.config("ts_ls", ts_config)
+      local clangd_config = require("lsp.clangd")
+      clangd_config.capabilities = capabilities
+      vim.lsp.config("clangd", clangd_config)
+      vim.lsp.enable("clangd")
       vim.lsp.config("qmlls", {
         cmd = { "qmlls6" },
         filetypes = { "qml" },
-        root_makers = { ".", ".git" },
+        root_markers = { ".", ".git" },
         capabilities = capabilities,
       })
       vim.lsp.enable("qmlls")

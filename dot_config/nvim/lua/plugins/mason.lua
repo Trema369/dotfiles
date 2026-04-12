@@ -20,6 +20,7 @@ return {
       "csharpier",
       "css-lsp",
       "prettier",
+      "clangd",
     },
   },
 }
