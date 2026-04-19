@@ -55,6 +55,7 @@ return {
           "javascript",
           "razor",
           "cpp",
+          "go",
         }, {
           max_jobs = 8,
         })

@@ -40,6 +40,14 @@ end
 
 -- ---------- Runners ----------
 local runners = {
+  go = function()
+    local root = find_project_root("go.mod")
+    if root then
+      return "go run .", root
+    end
+    -- Single file fallback
+    return "go run " .. vim.fn.expand("%"), vim.fn.expand("%:p:h")
+  end,
   python = function()
     return "python " .. vim.fn.expand("%"), vim.fn.expand("%:p:h")
   end,
@@ -87,6 +95,13 @@ local runners = {
 
 -- ---------- Builders ----------
 local builders = {
+  go = function()
+    local root = find_project_root("go.mod")
+    if not root then
+      return nil
+    end
+    return "go build ./...", root
+  end,
   cs = function()
     local root = find_project_root("*.csproj")
     if not root then

@@ -8,6 +8,7 @@ return {
       "eslint",
       "ts_ls",
       "jsonls",
+      "gopls",
     },
   },
   dependencies = {

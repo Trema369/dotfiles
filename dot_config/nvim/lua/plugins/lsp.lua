@@ -40,6 +40,19 @@ return {
         capabilities = capabilities,
       })
       vim.lsp.enable("qmlls")
+      vim.lsp.config("gopls", {
+        capabilities = capabilities,
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+            gofumpt = true,
+          },
+        },
+      })
+      vim.lsp.enable("gopls")
 
       local mason_root = require("mason.settings").current.install_root_dir
       vim.lsp.config("roslyn", {

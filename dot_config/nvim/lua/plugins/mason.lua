@@ -21,6 +21,7 @@ return {
       "css-lsp",
       "prettier",
       "clangd",
+      "gopls",
     },
   },
 }

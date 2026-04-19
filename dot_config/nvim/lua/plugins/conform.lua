@@ -17,6 +17,7 @@ return {
         scss = { "prettier" },
         axaml = { "avalonials" },
         xml = { "avalonials" },
+        go = { "gofumpt" },
 
         -- C# & XML
         cs = { "csharpier_trema" },
