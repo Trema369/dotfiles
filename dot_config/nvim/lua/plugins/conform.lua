@@ -14,6 +14,7 @@ return {
         javascriptreact = { "prettier" },
         html = { "prettier" },
         css = { "prettier" },
+        lua = { "stylua" },
         scss = { "prettier" },
         axaml = { "avalonials" },
         xml = { "avalonials" },
@@ -41,7 +42,7 @@ return {
         avalonials = {
           command = "xaml-styler", -- the CLI that AvaloniaLS uses internally
           args = { "--write-to-stdout", "--take-pipe" },
-          to_stdin = true,         -- sends buffer contents to CLI
+          to_stdin = true, -- sends buffer contents to CLI
         },
 
         -- Prettier

@@ -1,13 +1,19 @@
 -- mappings.lua
+require("config.toggleterm")
 
 -- Disable arrow keys
 local opts = { noremap = true, silent = true }
 
+local builtin = require("telescope.builtin")
 -- Normal mode
 vim.keymap.set("n", "<Up>", "<Nop>", opts)
 vim.keymap.set("n", "<Down>", "<Nop>", opts)
 vim.keymap.set("n", "<Left>", "<Nop>", opts)
 vim.keymap.set("n", "<Right>", "<Nop>", opts)
+vim.keymap.set("n", "<leader>ff", builtin.find_files)
+vim.keymap.set("n", "<leader>fh", builtin.help_tags)
+vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "diagnostics" })
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope file_browser<cr>", { desc = "file browser" })
 
 -- Insert mode
 vim.keymap.set("i", "<Up>", "<Nop>", opts)

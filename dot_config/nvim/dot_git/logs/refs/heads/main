@@ -12,3 +12,5 @@ e6e009025c295be0efc976958b14adfb3069d1b6 0814d954d1b681171dff1a6a0aed0693f570067
 0814d954d1b681171dff1a6a0aed0693f570067f 01e4476c9996359e955bbdf09b3221fb859579f4 Tadiwanashe Mazenge <trosky369@gmail.com> 1771619996 +0200	commit: added lighting to line collumn
 01e4476c9996359e955bbdf09b3221fb859579f4 e21733bcaf3cb6513532652ab75e018b5b57439d Tadiwanashe Mazenge <trosky369@gmail.com> 1771988715 +0200	commit: sensors update
 e21733bcaf3cb6513532652ab75e018b5b57439d 46d105de2ed35c3521a96fb9e0f569a03d63a35d Tadiwanashe Mazenge <trosky369@gmail.com> 1775298406 +0200	commit: fix: update lockfile
+46d105de2ed35c3521a96fb9e0f569a03d63a35d 0ecb2a94a747e1f1d00736c2493a5f78416d3cc3 Tadiwanashe Mazenge <trosky369@gmail.com> 1777362180 +0200	commit: track new files
+0ecb2a94a747e1f1d00736c2493a5f78416d3cc3 49a7d5de90bca2376676370a09afed18b79bdced Tadiwanashe Mazenge <trosky369@gmail.com> 1777368095 +0200	commit: track new files

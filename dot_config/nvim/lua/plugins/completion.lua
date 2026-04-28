@@ -44,33 +44,6 @@ return {
           local height = (vim.o.cmdheight == 0) and 1 or vim.o.cmdheight
           return { vim.o.lines - height, 0 }
         end,
-
-        draw = {
-          columns = {
-            { "kind_icon", "label", gap = 1 },
-            { "kind" },
-          },
-          components = {
-            kind_icon = {
-              text = function(item)
-                local kind = require("lspkind").symbol_map[item.kind] or ""
-                return kind .. " "
-              end,
-            },
-            label = {
-              text = function(item)
-                return item.label
-              end,
-              highlight = "CmpItemAbbr",
-            },
-            kind = {
-              text = function(item)
-                return item.kind
-              end,
-              highlight = "CmpItemKind",
-            },
-          },
-        },
       },
     },
 

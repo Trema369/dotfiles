@@ -18,9 +18,12 @@ return {
           mini = true,
         },
       })
-      vim.cmd.colorscheme("tokyodark")
+      vim.cmd.colorscheme("catppuccin")
+
+      require("config.highlights").setup()
     end,
   },
+
   {
     "folke/tokyonight.nvim",
     priority = 1000,

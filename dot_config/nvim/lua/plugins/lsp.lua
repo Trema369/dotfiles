@@ -1,142 +1,25 @@
 return {
   {
     "neovim/nvim-lspconfig",
+
     dependencies = {
       "saghen/blink.cmp",
+
       {
         "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
+        ft = "lua",
         opts = {
           library = {
-            -- See the configuration section for more details
-            -- Load luvit types when the `vim.uv` word is found
             { path = "${3rd}/luv/library", words = { "vim%.uv" } },
           },
         },
       },
     },
+
+    event = { "BufReadPre", "BufNewFile" },
+
     config = function()
-      --cappabilities for autocompletion
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-      local ts_config = require("lsp.ts")
-      ts_config.capabilities = capabilities
-      local original_on_attach = ts_config.on_attach
-
-      ts_config.on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = true
-        if original_on_attach then
-          original_on_attach(client, bufnr)
-        end
-      end
-      vim.lsp.config("ts_ls", ts_config)
-      local clangd_config = require("lsp.clangd")
-      clangd_config.capabilities = capabilities
-      vim.lsp.config("clangd", clangd_config)
-      vim.lsp.enable("clangd")
-      vim.lsp.config("qmlls", {
-        cmd = { "qmlls6" },
-        filetypes = { "qml" },
-        root_markers = { ".", ".git" },
-        capabilities = capabilities,
-      })
-      vim.lsp.enable("qmlls")
-      vim.lsp.config("gopls", {
-        capabilities = capabilities,
-        settings = {
-          gopls = {
-            analyses = {
-              unusedparams = true,
-            },
-            staticcheck = true,
-            gofumpt = true,
-          },
-        },
-      })
-      vim.lsp.enable("gopls")
-
-      local mason_root = require("mason.settings").current.install_root_dir
-      vim.lsp.config("roslyn", {
-        capabilities = capabilities,
-        on_attach = function(client)
-          client.server_capabilities.documentFormattingProvider = false
-        end,
-      })
-      vim.lsp.config("html", {
-        capabilities = capabilities,
-        on_attach = function(client)
-          -- Disable LSP formatting, let Prettier handle HTML formatting
-          client.server_capabilities.documentFormattingProvider = false
-        end,
-      })
-
-      vim.lsp.config("lua_ls", {
-        capabilities = capabilities,
-      })
-
-      vim.lsp.config("avalonia_ls", {
-        default_config = {
-          cmd = { "avalonia-ls" },        -- path to Avalonia LSP executable
-          filetypes = { "xml", "axaml" }, -- XML/XAML files
-          root_dir = vim.fs.dirname,      -- uses the file's directory as root
-          settings = {},                  -- Avalonia LSP usually needs no special settings
-          single_file_support = true,
-        },
-        capabilities = capabilities,
-        on_attach = function(client, bufnr)
-          -- Optional: disable formatting if you want to use Prettier or CSharpier
-          client.server_capabilities.documentFormattingProvider = true
-
-          -- Optional: keymaps for LSP actions
-          local opts = { noremap = true, silent = true, buffer = bufnr }
-          vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-        end,
-      })
-
-      vim.lsp.config("lua_ls", {
-        filetypes = { "lua" },
-        settings = {
-          Lua = {
-            runtime = {
-              version = "LuaJIT",
-              path = vim.split(package.path, ";"),
-            },
-            diagnostics = {
-              globals = { "vim" },
-            },
-            workspace = {
-              library = {
-                vim.api.nvim_get_runtime_file("", true),
-                vim.fn.stdpath("config"),
-              },
-              checkThirdParty = false,
-            },
-            telemetry = { enable = false },
-          },
-        },
-      })
-
-      --Auto-formating on save
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("my.lsp", {}),
-        callback = function(args)
-          local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-
-          if
-              not client:supports_method("textDocument/willSaveWaitUntil")
-              and client:supports_method("textDocument/formatting")
-          then
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              group = vim.api.nvim_create_augroup("my.lsp", { clear = false }),
-              buffer = args.buf,
-              callback = function()
-                vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
-              end,
-            })
-          end
-        end,
-      })
+      require("lsp.setup")
     end,
   },
 }
