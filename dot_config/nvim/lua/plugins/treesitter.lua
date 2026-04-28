@@ -1,5 +1,6 @@
 ---@module "lazy"
 ---@type LazySpec
+--ssa
 return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {

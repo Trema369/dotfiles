@@ -11,7 +11,7 @@ return {
       cmdline = {
         enabled = true, -- enables the Noice cmdline UI
         view = "cmdline_popup",
-        opts = {},      -- global options for the cmdline. See section on views
+        opts = {}, -- global options for the cmdline. See section on views
         format = {
           cmdline = { pattern = "^:", icon = "", lang = "vim" },
           search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
@@ -45,13 +45,20 @@ return {
       },
       input = { enabled = true }, -- improved vim.ui.input
       notifier = {
-        enabled = true,
+        enabled = false,
         style = "fancy",
-
       }, -- notifications
       -- You can enable other modules here if you like:
       -- dashboard = { enabled = true },
       -- picker = { enabled = true },
+    },
+  },
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      timeout = 5000,
+      background_colour = "#000000",
+      render = "wrapped-compact",
     },
   },
 }

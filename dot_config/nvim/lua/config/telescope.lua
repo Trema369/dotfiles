@@ -44,6 +44,29 @@ function M.setup()
         results_title = false,
       },
     },
+    extensions = {
+      file_browser = {
+        hijack_netrw = true,
+        hidden = true,
+        grouped = true,
+        initial_mode = "normal", -- vim motions work immediately
+        previewer = false,
+        prompt_path = true, -- shows current path in prompt
+        mappings = {
+          ["n"] = {
+            ["a"] = require("telescope._extensions.file_browser.actions").create,
+            ["r"] = require("telescope._extensions.file_browser.actions").rename,
+            ["d"] = require("telescope._extensions.file_browser.actions").remove,
+            ["m"] = require("telescope._extensions.file_browser.actions").move,
+            ["c"] = require("telescope._extensions.file_browser.actions").copy,
+            ["h"] = require("telescope._extensions.file_browser.actions").goto_parent_dir,
+            ["/"] = function()
+              vim.cmd("startinsert") -- jump to insert to search
+            end,
+          },
+        },
+      },
+    },
   })
   --  })
 
@@ -66,7 +89,7 @@ function M.setup()
   vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = C.red, bg = C.bg_light })
   vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = C.bg_light, fg = C.white })
 
-  vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = C.bg, bg = C.red })
+  vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = C.bg, bg = C.blue })
   vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = C.bg, bg = C.bg })
   vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = C.bg, bg = C.green })
 end
