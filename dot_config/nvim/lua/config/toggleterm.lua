@@ -1,44 +1,23 @@
 local M = {}
-local Terminal = require("toggleterm.terminal").Terminal
 
+-- Fast root finder using Neovim's internal FS crawler
 local function find_project_root(pattern)
-  local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-  if git_root and git_root ~= "" then
-    if vim.fn.glob(git_root .. "/" .. pattern) ~= "" then
-      return git_root
-    end
-  end
-  local dir = vim.fn.expand("%:p:h")
-  while dir ~= "/" do
-    if vim.fn.glob(dir .. "/" .. pattern) ~= "" then
-      return dir
-    end
-    dir = vim.fn.fnamemodify(dir, ":h")
-  end
-  return nil
+  return vim.fs.root(0, pattern) or vim.fs.root(0, ".git")
 end
 
 local function open_term(cmd, cwd)
+  local Terminal = require("toggleterm.terminal").Terminal
   local term = Terminal:new({
     cmd = cmd,
     cwd = cwd,
     hidden = true,
     direction = "float",
-    close_on_exit = false,
-    float_opts = {
-      border = "rounded",
-      width = function()
-        return math.floor(vim.o.columns * 0.8)
-      end,
-      height = function()
-        return math.floor(vim.o.lines * 0.8)
-      end,
-    },
+    float_opts = { border = "rounded" },
   })
   term:toggle()
 end
 
--- ---------- Runners ----------
+-- ... (Your Runners and Builders tables stay here) ...
 local runners = {
   go = function()
     local root = find_project_root("go.mod")
@@ -94,6 +73,7 @@ local runners = {
 }
 
 -- ---------- Builders ----------
+
 local builders = {
   go = function()
     local root = find_project_root("go.mod")
@@ -168,49 +148,25 @@ add_executable(%s ${SOURCES})
   end,
 }
 
--- ---------- Actions ----------
+
 function M.run_project()
   vim.cmd("write")
   local ft = vim.bo.filetype
   local runner = runners[ft]
-  if not runner then
-    vim.notify("No run command for " .. ft, vim.log.levels.WARN)
-    return
+  if runner then
+    local cmd, cwd = runner()
+    if cmd then open_term(cmd, cwd) end
   end
-  local cmd, cwd = runner()
-  if not cmd then
-    vim.notify("Project root not found", vim.log.levels.ERROR)
-    return
-  end
-  open_term(cmd, cwd)
 end
 
 function M.build_project()
   vim.cmd("write")
   local ft = vim.bo.filetype
   local builder = builders[ft]
-  if not builder then
-    vim.notify("No build command for " .. ft, vim.log.levels.WARN)
-    return
+  if builder then
+    local cmd, cwd = builder()
+    if cmd then open_term(cmd, cwd) end
   end
-  local cmd, cwd = builder()
-  if not cmd then
-    vim.notify("Project root not found", vim.log.levels.ERROR)
-    return
-  end
-  open_term(cmd, cwd)
 end
-
--- ---------- Keymaps ----------
-vim.keymap.set("n", "<F5>", function()
-  require("config.toggleterm").run_project()
-end, { silent = true })
-
-vim.keymap.set("n", "<S-F10>", function()
-  require("config.toggleterm").build_project()
-end, { silent = true })
-
-vim.keymap.set("t", "<C-Up>", "<cmd>resize +2<CR>", { silent = true })
-vim.keymap.set("t", "<C-Down>", "<cmd>resize -2<CR>", { silent = true })
 
 return M

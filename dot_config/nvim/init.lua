@@ -1,28 +1,37 @@
-require("config.lazy")
-require("config.mappings")
-require("tools")
-require("ui.statusline")
-require("config.tabline")
--- core editor options only
-vim.opt.clipboard = "unnamedplus"
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_matchit = 1
+vim.g.loaded_matchparen = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_tutor_mode_plugin = 1
 
+
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_clipboard_provider = 1 -- Stop detection hang
+-- 2. BOOTSTRAP LAZY
+require("config.lazy")
+
+-- 3. DEFER HEAVY UI (Statusline/Tabline)
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  callback = function()
+    require("tools")
+    require("ui.statusline")
+    require("config.tabline")
+    require("config.mappings")
+    require("lsp.setup").setup()
+    -- Now enable clipboard after the UI is up
+    --vim.opt.clipboard = "unnamedplus"
+  end,
+})
+
+-- 4. CORE OPTIONS (Lightweight)
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.signcolumn = "yes"
-
-vim.opt.wrap = true
-vim.opt.linebreak = true
-vim.opt.breakindent = true
-
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldtext = "getline(v:foldstart).'...'.trim(getline(v:foldend))"
-vim.opt.fillchars = { fold = "\\" }
-
-vim.opt.foldnestmax = 3
-vim.opt.foldminlines = 1
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
+-- ... (rest of your vim.opt and autocmds)
 
 vim.opt.fillchars = vim.opt.fillchars + { eob = " " }
 vim.api.nvim_set_hl(0, "WinBar", { bg = "none" })
@@ -37,26 +46,6 @@ vim.filetype.add({
     tsx = "typescriptreact",
     jsx = "javascriptreact",
   },
-})
-
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "*.axaml",
-  callback = function()
-    vim.bo.filetype = "xml"
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "xml", "axaml" },
-  callback = function()
-    vim.bo.expandtab = true
-    vim.bo.shiftwidth = 4
-    vim.bo.tabstop = 4
-    vim.bo.softtabstop = 4
-    vim.bo.autoindent = true
-    vim.bo.smartindent = false
-    vim.bo.cindent = false
-  end,
 })
 vim.diagnostic.config({
   signs = {

@@ -1,6 +1,3 @@
--- mappings.lua
-require("config.toggleterm")
-
 -- Disable arrow keys
 local opts = { noremap = true, silent = true }
 

@@ -11,7 +11,7 @@ return {
       cmdline = {
         enabled = true, -- enables the Noice cmdline UI
         view = "cmdline_popup",
-        opts = {}, -- global options for the cmdline. See section on views
+        opts = {},      -- global options for the cmdline. See section on views
         format = {
           cmdline = { pattern = "^:", icon = "", lang = "vim" },
           search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
