@@ -3,7 +3,7 @@
 --ssa
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = {"BufReadPost","BufNewFile"},
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     {
       "nvim-treesitter/nvim-treesitter-context",
@@ -17,14 +17,14 @@ return {
   branch = "main",
   build = ":TSUpdate",
   config = function()
-    local ts = require("nvim-treesitter")
+    local ts = require "nvim-treesitter"
 
     -- State tracking for async parser loading
     local parsers_loaded = {}
     local parsers_pending = {}
     local parsers_failed = {}
 
-    local ns = vim.api.nvim_create_namespace("treesitter.async")
+    local ns = vim.api.nvim_create_namespace "treesitter.async"
 
     -- Helper to start highlighting and indentation
     local function start(buf, lang)
@@ -92,6 +92,12 @@ return {
       "snacks_dashboard",
       "snacks_notif",
       "snacks_win",
+      "TelescopePrompt",
+      "TelescopeResults",
+      "TelescopePreview",
+      "notify",
+      "blink-cmp-menu",
+      "noice",
     }
 
     -- Auto-install parsers and enable highlighting on FileType
@@ -119,7 +125,7 @@ return {
         end
 
         -- Auto-install missing parsers (async, no-op if already installed)
-        ts.install({ lang })
+        ts.install { lang }
       end,
     })
   end,
