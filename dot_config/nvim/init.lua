@@ -11,16 +11,16 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_clipboard_provider = 1 -- Stop detection hang
 -- 2. BOOTSTRAP LAZY
-require("config.lazy")
+require "config.lazy"
 
 -- 3. DEFER HEAVY UI (Statusline/Tabline)
 vim.api.nvim_create_autocmd("User", {
   pattern = "VeryLazy",
   callback = function()
-    require("tools")
-    require("ui.statusline")
-    require("config.tabline")
-    require("config.mappings")
+    require "tools"
+    require "ui.statusline"
+    require "config.tabline"
+    require "config.mappings"
     require("lsp.setup").setup()
     -- Now enable clipboard after the UI is up
     --vim.opt.clipboard = "unnamedplus"
@@ -38,15 +38,15 @@ vim.api.nvim_set_hl(0, "WinBarNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ff9e64" })
 
 -- filetypes only (lightweight rules)
-vim.filetype.add({
+vim.filetype.add {
   extension = {
     xaml = "xml",
     axaml = "xml",
     tsx = "typescriptreact",
     jsx = "javascriptreact",
   },
-})
-vim.diagnostic.config({
+}
+vim.diagnostic.config {
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "󰅚",
@@ -59,4 +59,4 @@ vim.diagnostic.config({
   underline = true,
   update_in_insert = false,
   severity_sort = true,
-})
+}

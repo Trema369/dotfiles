@@ -7,7 +7,7 @@ function M.setup()
   end
 
   -- TS
-  local ts = merge(require("lsp.ts"), {
+  local ts = merge(require "lsp.ts", {
     capabilities = capabilities,
     settings = {
       typescript = {
@@ -30,10 +30,13 @@ function M.setup()
   vim.lsp.config("ts_ls", ts)
 
   -- clangd
-  vim.lsp.config("clangd", merge(require("lsp.clangd"), {
-    capabilities = capabilities,
-  }))
-  vim.lsp.enable("clangd")
+  vim.lsp.config(
+    "clangd",
+    merge(require "lsp.clangd", {
+      capabilities = capabilities,
+    })
+  )
+  vim.lsp.enable "clangd"
 
   -- qmlls
   vim.lsp.config("qmlls", {
@@ -42,7 +45,7 @@ function M.setup()
     root_markers = { ".", ".git" },
     capabilities = capabilities,
   })
-  vim.lsp.enable("qmlls")
+  vim.lsp.enable "qmlls"
 
   -- gopls
   vim.lsp.config("gopls", {
@@ -67,45 +70,15 @@ function M.setup()
       },
     },
   })
-  vim.lsp.enable("gopls")
+  vim.lsp.enable "gopls"
 
-  -- roslyn_ls via autocmd (bypasses lspconfig conflict)
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = "cs",
-    callback = function()
-      local root = vim.fs.root(0, { "*.csproj", "*.sln", ".git" })
-          or vim.fs.dirname(vim.api.nvim_buf_get_name(0))
-
-      vim.lsp.start({
-        name = "roslyn_ls",
-        cmd = {
-          "roslyn-language-server",
-          "--logLevel",
-          "Information",
-          "--extensionLogDirectory",
-          "/tmp/roslyn_ls/logs",
-          "--stdio",
-        },
-        root_dir = root,
-        capabilities = capabilities,
-        on_attach = function(client)
-          client.server_capabilities.documentFormattingProvider = false
-        end,
-        settings = {
-          ["csharp|background_analysis"] = {
-            dotnet_analyzer_diagnostics_scope = "openFiles",
-            dotnet_compiler_diagnostics_scope = "openFiles",
-          },
-          ["csharp|code_lens"] = {
-            dotnet_enable_references_code_lens = true,
-          },
-          ["csharp|inlay_hints"] = {
-            csharp_enable_inlay_hints_for_types = true,
-            dotnet_enable_inlay_hints_for_parameters = true,
-          },
-        },
-      })
-    end,
+  vim.lsp.config("roslyn", {
+    settings = {
+      ["csharp|background_analysis"] = {
+        dotnet_analyzer_diagnostics_scope = "openFiles",
+        dotnet_compiler_diagnostics_scope = "openFiles",
+      },
+    },
   })
 
   -- html
@@ -148,26 +121,28 @@ function M.setup()
     group = group,
     callback = function(args)
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if not client then return end
+      if not client then
+        return
+      end
 
       -- codelens
-      if client:supports_method("textDocument/codeLens") then
+      if client:supports_method "textDocument/codeLens" then
         vim.lsp.codelens.enable(true, { bufnr = args.buf })
       end
 
       -- format on save
       if
-          not client:supports_method("textDocument/willSaveWaitUntil")
-          and client:supports_method("textDocument/formatting")
+        not client:supports_method "textDocument/willSaveWaitUntil"
+        and client:supports_method "textDocument/formatting"
       then
         vim.api.nvim_create_autocmd("BufWritePre", {
           buffer = args.buf,
           callback = function()
-            vim.lsp.buf.format({
+            vim.lsp.buf.format {
               bufnr = args.buf,
               id = client.id,
               timeout_ms = 1000,
-            })
+            }
           end,
         })
       end

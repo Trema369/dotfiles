@@ -18,7 +18,7 @@ return {
     },
     config = function(_, opts)
       require("mason").setup(opts)
-      -- Optional: Run your ensure_installed logic here if you 
+      -- Optional: Run your ensure_installed logic here if you
       -- prefer it handled by a custom function
     end,
   },
@@ -28,9 +28,14 @@ return {
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     opts = {
       ensure_installed = {
-        "pyright", "rust_analyzer", "eslint", "ts_ls", "jsonls", "gopls",
+        "pyright",
+        "rust_analyzer",
+        "eslint",
+        "ts_ls",
+        "jsonls",
+        "gopls",
+        "roslyn",
       },
     },
-  }
+  },
 }
-
