@@ -37,6 +37,22 @@ function M.setup()
     })
   )
   vim.lsp.enable "clangd"
+  vim.lsp.config("c3_lsp", {
+    cmd = {
+      "c3lsp",
+      "--compiler-path",
+      "/data/data/com.termux/files/home/c3/c3c",
+      "--stdlib-path",
+      "/data/data/com.termux/files/home/c3/lib/std",
+      "--diagnostics-delay",
+      "1000",
+    },
+    filetypes = { "c3", "c3i" },
+    root_markers = { "project.json", ".git" },
+    single_file_support = true,
+    capabilities = capabilities,
+  })
+  vim.lsp.enable "c3_lsp"
 
   -- qmlls
   vim.lsp.config("qmlls", {

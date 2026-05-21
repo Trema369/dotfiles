@@ -9,7 +9,7 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_python3_provider = 0
-vim.g.loaded_clipboard_provider = 1 -- Stop detection hang
+vim.opt.clipboard = "unnamedplus"
 -- 2. BOOTSTRAP LAZY
 require "config.lazy"
 
@@ -23,7 +23,6 @@ vim.api.nvim_create_autocmd("User", {
     require "config.mappings"
     require("lsp.setup").setup()
     -- Now enable clipboard after the UI is up
-    --vim.opt.clipboard = "unnamedplus"
   end,
 })
 
@@ -44,6 +43,8 @@ vim.filetype.add {
     axaml = "xml",
     tsx = "typescriptreact",
     jsx = "javascriptreact",
+    c3 = "c3",
+    c3i = "c3i",
   },
 }
 vim.diagnostic.config {

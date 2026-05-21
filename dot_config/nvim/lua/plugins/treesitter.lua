@@ -98,6 +98,7 @@ return {
       "notify",
       "blink-cmp-menu",
       "noice",
+      "toggleterm",
     }
 
     -- Auto-install parsers and enable highlighting on FileType

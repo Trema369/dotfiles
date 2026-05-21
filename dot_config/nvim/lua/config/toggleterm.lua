@@ -88,6 +88,7 @@ local function open_term(cmd, cwd, ft, is_build)
     cmd = cmd,
     cwd = cwd,
     hidden = true,
+    close_on_exit = false,
     direction = "float",
     float_opts = {
       border = "none",
