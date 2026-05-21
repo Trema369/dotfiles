@@ -31,7 +31,7 @@ return {
       local ok = pcall(vim.treesitter.start, buf, lang)
       if ok then
         -- Only set Tree-sitter indentexpr for languages that support it
-        local skip_indent = { "c_sharp", "cs", "qml", "qmljs" } -- add any other langs to skip
+        local skip_indent = { "c3", "c_sharp", "cs", "qml", "qmljs" } -- add any other langs to skip
 
         if not vim.tbl_contains(skip_indent, lang) then
           vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
