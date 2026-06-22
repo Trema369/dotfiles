@@ -6,13 +6,62 @@ return {
     priority = 1000,
     lazy = false,
     config = function()
-      require("catppuccin").setup({
+      require("catppuccin").setup {
         flavour = "mocha",
         transparent_background = true,
         integrations = { treesitter = true, native_lsp = { enabled = true }, mini = true },
-      })
-      vim.cmd.colorscheme("tokyodark")
+      }
+      --vim.cmd.colorscheme "tokyodark"
       require("config.highlights").setup()
+    end,
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("kanagawa").setup {
+        transparent = false,
+        colors = {
+          theme = {
+            all = {
+              ui = {
+                bg_gutter = "none",
+              },
+            },
+          },
+        },
+      }
+      vim.cmd.colorscheme "kanagawa"
+    end,
+  },
+  {
+    "webhooked/kanso.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("kanso").setup {
+        transparent = true,
+        background = {
+          dark = "zen",
+          light = "zen",
+        },
+      }
+    end,
+  },
+  {
+    "metalelf0/kintsugi-nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("kintsugi").setup {
+        variant = "dark", -- "dark" | "flared"
+        transparent = false,
+        terminal_colors = true,
+        bold_keywords = true,
+        italic_comments = false,
+      }
+      --vim.cmd.colorscheme "kintsugi-dark" -- or "kintsugi-flared"
     end,
   },
   { "folke/tokyonight.nvim", lazy = true }, -- Set others to lazy
@@ -28,12 +77,12 @@ return {
         keywords = { italic = false },
         identifiers = { italic = false },
         functions = {},
-        variables = {}
-      }
+        variables = {},
+      },
     },
     config = function(_, opts)
       require("tokyodark").setup(opts)
-    end
+    end,
   },
 
   -- ICONS: Load only when a UI component needs them
@@ -43,7 +92,7 @@ return {
     "brenoprata10/nvim-highlight-colors",
     event = "BufReadPre",
     config = function()
-      require("nvim-highlight-colors").setup({
+      require("nvim-highlight-colors").setup {
         render = "virtual", -- "background" | "foreground" | "virtual"
 
         enable_hex = true,
@@ -60,7 +109,7 @@ return {
         virtual_symbol = " 󱓻 ",
         --- performance
         debounce = 200,
-      })
+      }
     end,
-  }
+  },
 }

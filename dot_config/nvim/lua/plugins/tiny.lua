@@ -3,11 +3,12 @@ return {
   {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "VeryLazy", -- Stays VeryLazy to keep startup snappy
+    enabled = true,
     priority = 1000,
     config = function()
       -- Disable default virtual text so tiny-inline can take over
-      vim.diagnostic.config({ virtual_text = false })
-      require("tiny-inline-diagnostic").setup({})
+      vim.diagnostic.config { virtual_text = false }
+      require("tiny-inline-diagnostic").setup {}
     end,
   },
 

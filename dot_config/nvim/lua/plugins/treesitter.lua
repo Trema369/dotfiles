@@ -86,6 +86,7 @@ return {
     local group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true })
 
     local ignore_filetypes = {
+      "c3",
       "checkhealth",
       "lazy",
       "mason",
@@ -97,6 +98,7 @@ return {
       "TelescopePreview",
       "notify",
       "blink-cmp-menu",
+      "blink-cmp-documantation",
       "noice",
       "toggleterm",
     }

@@ -1,12 +1,13 @@
-local conform = require("conform")
+local conform = require "conform"
 
-conform.setup({
+conform.setup {
   async = true,
 
   formatters_by_ft = {
-    cs     = { "csharpier_trema" },
+    cs = { "csharpier_trema" },
     csproj = { "csharpier_trema" },
-    xml    = { "avalonia_lsp" },
+    xml = { "avalonia_lsp" },
+    c3 = { "c3fmt" },
   },
 
   formatters = {
@@ -16,12 +17,29 @@ conform.setup({
       to_stdin = true,
     },
 
+    c3fmt = {
+      format = function(_, ctx)
+        local file = ctx.filename
+
+        vim.fn.system {
+          "c3fmt",
+          "--in-place",
+          file,
+        }
+
+        return {
+          bufnr = ctx.buf,
+          timeout_ms = 2000,
+        }
+      end,
+    },
+
     -- xstyler as Lua function
     xstyler = {
       format = function(bufnr)
         local file = vim.api.nvim_buf_get_name(bufnr)
-        vim.fn.system({ "xstyler", "-f", file })
-        vim.cmd("edit") -- reload buffer
+        vim.fn.system { "xstyler", "-f", file }
+        vim.cmd "edit" -- reload buffer
       end,
     },
 
@@ -29,7 +47,7 @@ conform.setup({
     avalonia_lsp = {
       format = function(opts)
         local bufnr = opts.bufnr
-        vim.lsp.buf.format({ bufnr = bufnr, async = true })
+        vim.lsp.buf.format { bufnr = bufnr, async = true }
       end,
     },
   },
@@ -38,4 +56,4 @@ conform.setup({
     timeout_ms = 1000,
     lsp_fallback = false,
   },
-})
+}

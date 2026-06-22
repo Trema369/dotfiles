@@ -4,7 +4,6 @@ vim.g.loaded_matchit = 1
 vim.g.loaded_matchparen = 1
 vim.g.loaded_2html_plugin = 1
 vim.g.loaded_tutor_mode_plugin = 1
-
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
@@ -12,21 +11,22 @@ vim.g.loaded_python3_provider = 0
 vim.opt.clipboard = "unnamedplus"
 -- 2. BOOTSTRAP LAZY
 require "config.lazy"
-
 -- 3. DEFER HEAVY UI (Statusline/Tabline)
 vim.api.nvim_create_autocmd("User", {
   pattern = "VeryLazy",
   callback = function()
+    require("lsp.setup").setup()
     require "tools"
-    require "ui.statusline"
     require "config.tabline"
     require "config.mappings"
-    require("lsp.setup").setup()
     -- Now enable clipboard after the UI is up
   end,
 })
 
 -- 4. CORE OPTIONS (Lightweight)
+vim.opt.statusline = ""
+vim.g.statusline_winid = nil
+vim.o.laststatus = 0
 vim.opt.number = true
 vim.opt.relativenumber = true
 -- ... (rest of your vim.opt and autocmds)

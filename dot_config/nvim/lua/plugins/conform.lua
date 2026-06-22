@@ -15,6 +15,7 @@ return {
         html = { "prettier" },
         css = { "prettier" },
         lua = { "stylua" },
+        c3 = { "c3fmt" },
         scss = { "prettier" },
         axaml = { "avalonials" },
         xml = { "avalonials" },
@@ -44,6 +45,16 @@ return {
           args = { "--write-to-stdout", "--take-pipe" },
           to_stdin = true, -- sends buffer contents to CLI
         },
+        c3fmt = {
+          command = "c3fmt",
+          args = {
+            "--config",
+            vim.fn.expand "~/.c3fmt",
+            "--stdin",
+            "--stdout",
+          },
+          stdin = true,
+        },
 
         -- Prettier
         prettier = {
@@ -70,7 +81,7 @@ return {
       -- Format on save logic
       format_on_save = function(bufnr)
         local bufname = vim.api.nvim_buf_get_name(bufnr)
-        if bufname:match("/node_modules/") then
+        if bufname:match "/node_modules/" then
           return
         end
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
