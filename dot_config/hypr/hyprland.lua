@@ -1,0 +1,6 @@
+require("hyprland.scripts.appearence")
+require("hyprland.scripts.input")
+require("hyprland.scripts.autostart")
+require("hyprland.scripts.keybinds")
+require("hyprland.scripts.windowrules")
+require("hyprland.scripts.monitors")

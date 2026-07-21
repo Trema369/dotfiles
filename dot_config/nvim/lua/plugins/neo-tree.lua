@@ -76,7 +76,7 @@ return {
       })
 
       -- Transparent Neo-tree
-      vim.keymap.set("n", "<C-n>", ":Neotree reveal filesystem left<CR>", { silent = true })
+      vim.keymap.set("n", "<C-n>", ":Neotree toggle filesystem left<CR>", { silent = true })
     end,
   },
 }

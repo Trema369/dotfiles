@@ -21,7 +21,8 @@ return {
     priority = 1000,
     config = function()
       require("kanagawa").setup {
-        transparent = false,
+        transparent = true,
+        keywordStyle = { italic = false },
         colors = {
           theme = {
             all = {
@@ -65,7 +66,7 @@ return {
     end,
   },
   { "folke/tokyonight.nvim", lazy = true }, -- Set others to lazy
-  { "sainnhe/sonokai",       lazy = true },
+  { "sainnhe/sonokai", lazy = true },
   {
     "tiagovla/tokyodark.nvim",
     lazy = true,

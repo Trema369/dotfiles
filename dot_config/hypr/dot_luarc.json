@@ -1,0 +1,12 @@
+{
+	"workspace": {
+		"library": [
+			"/home/trema/.config/hypr/"
+		]
+	},
+	"diagnostics": {
+		"globals": [
+			"hl"
+		]
+	}
+}
