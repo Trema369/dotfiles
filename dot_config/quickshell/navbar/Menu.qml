@@ -20,7 +20,7 @@ Item {
         anchors.rightMargin: 20
 
         columns: 2
-        rows: 6
+        rows: 7
         rowSpacing: 10
         columnSpacing: 10
 
@@ -265,6 +265,13 @@ Item {
             Layout.columnSpan: 2
             Layout.fillWidth: true
             Layout.preferredHeight: 40
+        }
+        Brightness {
+            Layout.row: 6
+            Layout.column: 0
+            Layout.columnSpan: 2
+            Layout.fillWidth: true
+            Layout.preferredHeight: 30
         }
     }
 }
