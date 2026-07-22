@@ -264,14 +264,14 @@ Item {
             Layout.column: 0
             Layout.columnSpan: 2
             Layout.fillWidth: true
-            Layout.preferredHeight: 40
+            Layout.preferredHeight: 45
         }
         Brightness {
             Layout.row: 6
             Layout.column: 0
             Layout.columnSpan: 2
             Layout.fillWidth: true
-            Layout.preferredHeight: 30
+            Layout.preferredHeight: 45
         }
     }
 }

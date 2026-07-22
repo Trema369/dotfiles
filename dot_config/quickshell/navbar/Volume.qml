@@ -4,13 +4,11 @@ import QtQuick
 
 Item {
     id: volumeControl
-
     readonly property PwNode sink: Pipewire.defaultAudioSink
     PwObjectTracker {
         objects: [volumeControl.sink]
     }
     readonly property real volume: sink?.audio?.volume ?? 0
-
     Rectangle {
         id: track
         anchors.fill: parent
@@ -18,7 +16,6 @@ Item {
         color: Qt.rgba(1, 1, 1, 0.15)
         border.color: Qt.rgba(1, 1, 1, 0.3)
         border.width: 1
-
         Rectangle {
             anchors.left: parent.left
             anchors.top: parent.top
@@ -36,7 +33,6 @@ Item {
             radius: width / 2
             color: Qt.rgba(1, 1, 1, 0.9)
             z: 2
-
             Text {
                 anchors.centerIn: parent
                 text: "\ue638"

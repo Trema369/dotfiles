@@ -1,6 +1,5 @@
 import Quickshell.Io
 import QtQuick
-import QtQuick.Controls
 
 Item {
     id: brightnessControl
@@ -40,6 +39,17 @@ Item {
         }
     }
 
+    // poll for external changes (macro keys, other tools)
+    Timer {
+        interval: 2000
+        running: true
+        repeat: true
+        onTriggered: {
+            if (!setBrightness.running)
+                getCurrent.running = true;
+        }
+    }
+
     Timer {
         id: debounce
         interval: 150
@@ -58,15 +68,53 @@ Item {
         running: false
     }
 
-    Slider {
+    Rectangle {
+        id: track
         anchors.fill: parent
-        from: 0
-        to: 1
-        value: brightnessControl.currentBrightness
-        enabled: brightnessControl.ready
-        onMoved: {
-            brightnessControl.currentBrightness = value;
-            debounce.restart();
+        radius: height / 2
+        color: Qt.rgba(1, 1, 1, 0.15)
+        border.color: Qt.rgba(1, 1, 1, 0.3)
+        border.width: 1
+
+        Rectangle {
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            radius: height / 2
+            color: Qt.rgba(1, 1, 1, 0.6)
+            width: track.width * brightnessControl.currentBrightness
+        }
+
+        Rectangle {
+            anchors.left: parent.left
+            anchors.leftMargin: 4
+            anchors.verticalCenter: parent.verticalCenter
+            width: parent.height - 8
+            height: parent.height - 8
+            radius: width / 2
+            color: Qt.rgba(1, 1, 1, 0.9)
+            z: 2
+            Text {
+                anchors.centerIn: parent
+                text: "\uf185"
+                font.family: Theme.fontFamily
+                color: "gray"
+            }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            enabled: brightnessControl.ready
+            onPressed: mouse => updateBrightness(mouse.x)
+            onPositionChanged: mouse => {
+                if (pressed)
+                    updateBrightness(mouse.x);
+            }
+            function updateBrightness(x) {
+                let pct = Math.max(0, Math.min(1, x / width));
+                brightnessControl.currentBrightness = pct;
+                debounce.restart();
+            }
         }
     }
 }

@@ -3,8 +3,8 @@ import QtQuick
 
 PanelWindow {
     anchors.top: true
-    implicitHeight: 370
-    implicitWidth: 410
+    implicitHeight: 420
+    implicitWidth: 420
     color: "transparent"
     margins.top: 5
     exclusiveZone: 40
@@ -151,8 +151,8 @@ PanelWindow {
                 name: "expanded"
                 PropertyChanges {
                     target: shape
-                    width: 410
-                    height: 370
+                    width: 420
+                    height: 420
                 }
             },
             State {
