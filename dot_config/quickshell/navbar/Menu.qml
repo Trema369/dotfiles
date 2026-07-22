@@ -25,31 +25,45 @@ Item {
         columnSpacing: 10
 
         // clock / date row
-        Row {
-            id: idleRow
-            spacing: 6
+        // replaces your existing "clock / date row" in Menu.qml
+        Item {
             Layout.row: 0
             Layout.column: 0
             Layout.columnSpan: 2
             Layout.fillWidth: true
+            Layout.preferredHeight: 30
 
-            Text {
-                id: time
-                text: Time.time
-                color: "white"
-                font.family: Theme.fontFamily
-                font.bold: true
-                font.pixelSize: 20
-                horizontalAlignment: Text.AlignHCenter
+            Row {
+                id: idleRow
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 6
+
+                Text {
+                    id: time
+                    text: Time.time
+                    color: "white"
+                    font.family: Theme.fontFamily
+                    font.bold: true
+                    font.pixelSize: 20
+                    horizontalAlignment: Text.AlignHCenter
+                }
+                Text {
+                    anchors.baseline: time.baseline
+                    text: Time.dateStr
+                    color: "gray"
+                    font.family: Theme.fontFamily
+                    font.pixelSize: 15
+                    font.bold: true
+                    horizontalAlignment: Text.AlignHCenter
+                }
             }
-            Text {
-                anchors.baseline: time.baseline
-                text: Time.dateStr
-                color: "gray"
-                font.family: Theme.fontFamily
-                font.pixelSize: 15
-                font.bold: true
-                horizontalAlignment: Text.AlignHCenter
+
+            BatteryStatus {
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                width: 60
+                height: 24
             }
         }
         Rectangle {
