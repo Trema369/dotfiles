@@ -3,8 +3,8 @@ import QtQuick
 
 PanelWindow {
     anchors.top: true
-    implicitHeight: 420
-    implicitWidth: 420
+    implicitHeight: 640
+    implicitWidth: 460
     color: "transparent"
     margins.top: 5
     exclusiveZone: 40
@@ -36,6 +36,12 @@ PanelWindow {
                 if (Globals.requestPomodoroSetup) {
                     shape.state = "pomodoroSetup";
                     Globals.requestPomodoroSetup = false;
+                }
+            }
+            function onRequestDisplaySetupChanged() {
+                if (Globals.requestDisplaySetup) {
+                    shape.state = "displaySetup";
+                    Globals.requestDisplaySetup = false;
                 }
             }
             function onRequestReturnToIdleChanged() {
@@ -138,6 +144,10 @@ PanelWindow {
         PomodoroSetup {
             visible: shape.state === "pomodoroSetup"
         }
+
+        DisplaySetup {
+            visible: shape.state === "displaySetup"
+        }
         states: [
             State {
                 name: "idle"
@@ -161,6 +171,14 @@ PanelWindow {
                     target: shape
                     width: 300
                     height: 220
+                }
+            },
+            State {
+                name: "displaySetup"
+                PropertyChanges {
+                    target: shape
+                    width: 360
+                    height: Displays.panelHeight
                 }
             }
         ]

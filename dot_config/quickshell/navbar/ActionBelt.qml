@@ -44,8 +44,8 @@ Item {
                     ,
                     {
                         icon: "\uf209",
-                        name: "cast"
-                    }          // cast
+                        name: "display"
+                    }       // display / cast
                 ]
 
                 delegate: Rectangle {
@@ -69,6 +69,9 @@ Item {
                             switch (modelData.name) {
                                 case "pomodoro":
                                     Globals.requestPomodoroSetup = true;
+                                    break;
+                                case "display":
+                                    Globals.requestDisplaySetup = true;
                                     break;
                                 default:
                                     console.log(modelData.name + " clicked — not wired yet");
